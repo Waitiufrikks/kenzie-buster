@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from users.models import User
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 
 
 class UserSerializers(serializers.Serializer):
@@ -27,9 +29,6 @@ class UserSerializers(serializers.Serializer):
                     "email": ["email already registered."],
                 }
             )
-
-        # if User.objects.filter(username=username).exists():
-        #     raise serializers.ValidationError({"username": ["username already taken."]})
 
         return data
 

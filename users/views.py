@@ -2,6 +2,7 @@ from rest_framework.views import APIView, Request, Response, status
 
 from users.models import User
 from users.serializers import UserSerializers
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 class UserView(APIView):

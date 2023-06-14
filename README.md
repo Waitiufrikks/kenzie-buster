@@ -57,8 +57,8 @@ pytest --testdox -vvs
 Ao fim de cada tarefa será possível executar uma suite de testes direcionada àquela tarefa específica. Lembre-se de sempre estar com o **virtual enviroment (venv) ativado**.
 
 - Rodando testes da Tarefa 1:
-```python
-pytest --testdox -vvs tests/tarefas/t1/
+```
+python pytest --testdox -vvs tests/tarefas/t1/
 ```
 
 - Rodando testes da Tarefa 2:
