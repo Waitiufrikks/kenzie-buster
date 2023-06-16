@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 
 class Rating_Age(models.TextChoices):
     Rated_G = "G"
@@ -23,3 +25,19 @@ class Movie(models.Model):
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, related_name="movies"
     )
+    buyed_by = models.ManyToManyField(
+        "users.User", through="movies.MovieOrder", related_name="buyed_movies"
+    )
+
+    def __str__(self) -> str:
+        return f"id: {self.id} ,title: {self.title}"
+
+
+class MovieOrder(models.Model):
+    movie = models.ForeignKey("movies.Movie", on_delete=models.CASCADE)
+    buyed_by = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    buyed_at = models.DateTimeField(auto_now_add=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def __str__(self) -> str:
+        return f"user: {self.user} ,movie: {self.movie},buyed:{self.buyed_at},"
