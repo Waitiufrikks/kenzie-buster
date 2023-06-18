@@ -3,7 +3,6 @@ from users.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-
 class UserSerializers(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     username = serializers.CharField(max_length=150)
@@ -32,7 +31,16 @@ class UserSerializers(serializers.Serializer):
 
         return data
 
+    def validate_user(self, data):
+        return data
+
     def create(self, validated_data: dict) -> User:
         if validated_data.get("is_employee"):
             return User.objects.create_superuser(**validated_data)
         return User.objects.create_user(**validated_data)
+
+    def update(self, instance, validated_data):
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+        instance.save()
+        return instance
